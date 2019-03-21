@@ -14,12 +14,14 @@ export default class Activity extends React.Component {
     this.state = {
       status: '',
       visible: false,
+      id: this.props.activity.id,
       title: this.props.activity.title,
       url: this.props.activity.url,
       date: this.props.activity.date,
       catogery: this.props.activity.catogery ,
       privacy: this.props.activity.privacy ,
       previousDetails: {
+        id: this.props.activity.id,
         title: this.props.activity.title,
         url: this.props.activity.url,
         date: this.props.activity.date,
@@ -56,14 +58,30 @@ export default class Activity extends React.Component {
     let updatedcatogery = this.state.catogery.trim();
 
     console.log("Catogery before update :" +updatedcatogery);
-    activityDetail.update(this.state.previousDetails.email,
-      updatedTitle, updatedurl, updateddate, updatedcatogery);
+    
+    let updatedact ={
+      id: this.state.activity.id,
+      title: updatedTitle,
+      url: updatedurl,
+      date: updateddate,
+      catogery: updatedcatogery ,
+      privacy: this.props.activity.privacy 
+    }
+    console.log("Updated act:");
+    console.log(updatedact);
+    this.props.editHandler(updatedact);
+    this.setState({
+      status: '',
+      visible: false,
+    });
+    // activityDetail.update(this.state.previousDetails.email,
+    //   updatedTitle, updatedurl, updateddate, updatedcatogery);
 
-      let {title, url, date, catogery, privacy} = this.state ;
-      this.setState({status : '',
-          previousDetails: {title, url, date, catogery, privacy}
-      })
-      console.log("Catogery after update :" +catogery);
+    //   let {title, url, date, catogery, privacy} = this.state ;
+    //   this.setState({status : '',
+    //       previousDetails: {title, url, date, catogery, privacy}
+    //   })
+      // console.log("Catogery after update :" +catogery);
       
 
   }; 
@@ -97,8 +115,12 @@ export default class Activity extends React.Component {
     
     e.preventDefault();
     console.log("inside handledelete");
-    activityDetail.delete(this.state.url);
-        this.props.deleteHandler();
+    console.log(this.state.id+ " " +this.state.title);
+    // activityDetail.delete(this.props.id).then(()=>console.log('XXXXXXXXX')).then(()=>this.props.deleteHandler());
+        
+    this.props.deleteHandler(this.state.id);
+        
+
   }
 
   render() {

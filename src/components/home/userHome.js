@@ -31,80 +31,90 @@ class Home extends Component {
     console.log('In Home ' +userid);
     console.log('URL : '+ this.props.match.url);
         return (
-            // <Container>
-            //         <Row>
-                    
-            //             <Col sm="2">
-            //             <div class="hometab">
-            //                  <Nav vertical>
-            //                     <NavItem>
-            //                         <NavLink exact to={`${homePath}`}><span class="tabtext "> Home</span></NavLink>
-            //                     </NavItem>
-            //                     <NavItem>
-            //                         <NavLink exact to={`${homePath}profile`}><span class="tabtext"> Profile</span></NavLink>
-            //                     </NavItem>
-            //                     <NavItem>
-            //                         <NavLink exact to={`${homePath}pds`}><span class="tabtext"> PersonalData</span></NavLink>
-            //                     </NavItem>
-            //                     <NavItem>
-            //                         <NavLink exact to={`${homePath}privacy`}><span class="tabtext"> PrivacyDashboard</span></NavLink>
-            //                     </NavItem>
-            //                 </Nav> 
-                            
-            //                 </div>
-            //             </Col>
-                        
-            //             <Col sm="10">
-            //                 {/* <Switch> */}
-            //                     <Route exact path={`${homePath}`} component={PersonalDataTab} />
-            //                     <Route exact path={`${homePath}profile`} component={Welcome} />
-            //                     <Route exact path={`${homePath}pds`} component={PersonalDataTab} />
-            //                     <Route exact path={`${homePath}privacy`} component={Welcome} />
-            //                     {/* <Redirect from='*' to={`${homePath}`} />
-            //                 </Switch> */}
-                            
-            //             </Col>
-
-            //         </Row>
-            //     </Container>
-            
-                <Container>
+            <Container>
                     <Row>
                     
                         <Col sm="2">
                         <div class="hometab">
                              <Nav vertical>
                                 <NavItem>
-                                    <NavLink exact to={homePath}><span class="tabtext "> Home</span></NavLink>
+                                    <NavLink exact to={`${homePath}`}><span class="tabtext "> Home</span></NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink exact to={profilePath}><span class="tabtext"> Profile</span></NavLink>
+                                    <NavLink exact to={`${homePath}profile`}><span class="tabtext"> Profile</span></NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink exact to={pdsPath}><span class="tabtext"> PersonalData</span></NavLink>
+                                    <NavLink exact to={`${homePath}pds`}><span class="tabtext"> PersonalData</span></NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink exact to={privacyPath}><span class="tabtext"> PrivacyDashboard</span></NavLink>
+                                    <NavLink exact to={`${homePath}privacy`}><span class="tabtext"> PrivacyDashboard</span></NavLink>
                                 </NavItem>
                             </Nav> 
                             
                             </div>
                         </Col>
-                        
+                     
                         <Col sm="10">
                             <Switch>
-                                <Route exact path='/home/pds/' component={PersonalDataTab} />
-                                <Route exact path='/home/profile/' 
-                                render={ (props) => <Profile {...props} usersid={userid} /> } />
-                                <Route exact path='/home/privacy/' component={PersonalDataTab} />
                                 <Route exact path='/home/:userid/' component={Welcome} />
-                                <Redirect from='*' to='/home/' />
+                                <Route exact path='/home/:userid/profile' component={Profile} />
+                                <Route exact path='/home/:userid/pds' component={PersonalDataTab} />
+                                <Route exact path='/home/:userid/privacy' component={Welcome} />
+                                <Redirect from='*' to={`${homePath}`} />
                             </Switch>
                             
-                        </Col>
+                        </Col> 
+                                                {/* <Col sm="10">
+                            <Switch>
+                                <Route exact path='/home/:userid/' component={PersonalDataTab} />
+                                <Route exact path='/home/:userid/profile' component={Profile} />
+                                <Route exact path='/home/:userid/pds' component={PersonalDataTab} />
+                                <Route exact path='/home/:userid/privacy' component={Profile} />
+                                <Redirect from='*' to={`${homePath}`} />
+                            </Switch>
+                            
+                        </Col> */}
 
                     </Row>
                 </Container>
+            
+                // <Container>
+                //     <Row>
+                    
+                //         <Col sm="2">
+                //         <div class="hometab">
+                //              <Nav vertical>
+                //                 <NavItem>
+                //                     <NavLink exact to={homePath}><span class="tabtext "> Home</span></NavLink>
+                //                 </NavItem>
+                //                 <NavItem>
+                //                     <NavLink exact to={profilePath}><span class="tabtext"> Profile</span></NavLink>
+                //                 </NavItem>
+                //                 <NavItem>
+                //                     <NavLink exact to={pdsPath}><span class="tabtext"> PersonalData</span></NavLink>
+                //                 </NavItem>
+                //                 <NavItem>
+                //                     <NavLink exact to={privacyPath}><span class="tabtext"> PrivacyDashboard</span></NavLink>
+                //                 </NavItem>
+                //             </Nav> 
+                            
+                //             </div>
+                //         </Col>
+                        
+                //         <Col sm="10">
+                //             <Switch>
+                //                 <Route exact path='/home/pds/' component={PersonalDataTab} />
+                //                 <Route exact path='/home/profile/' 
+                //                 render={ (props) => <Profile {...props} usersid={userid} /> } />
+                //                 <Route exact path='/home/privacy/' component={PersonalDataTab} />
+                //                 <Route exact path='/home/:userid/' component={Welcome} />
+                //                 <Redirect from='*' to='/home/' />
+                //             </Switch>
+                            
+                //         </Col>
+
+                //     </Row>
+                // </Container>
             
         );
     }

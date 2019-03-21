@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Collapse, Button, CardBody, Card, Col, Row, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import activityDetail from '../../../datastore/activityAPI';
 import activityAPI from '../../../datastore/activityAPI';
+import cuid from 'cuid';
 
 class CreateItem extends Component {
     constructor(props) {
@@ -37,13 +38,23 @@ class CreateItem extends Component {
 
     if(newitemtype === 'Activity')
     {
-        activityAPI.add(newtitle, newurl, newdate, newcatogery, newprivacy);
+        // activityAPI.add(newtitle, newurl, newdate, newcatogery, newprivacy);
+        let newactid=cuid();
+        let newact ={
+            id: newactid,
+            title: newtitle,
+            url: newurl,
+            date: newdate,
+            catogery: newcatogery ,
+            privacy: newprivacy 
+          }
+          this.props.addActivity(newact);
     }
     else{
         return;
     }
             // let {name, email, gender, contact} = this.state ;
-        this.props.addActivity();
+        
 
     };
 

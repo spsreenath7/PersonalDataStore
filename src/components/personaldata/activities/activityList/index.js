@@ -7,7 +7,7 @@ export default class ActivityList extends Component {
       console.log("inside actList render");
       console.log(this.props.activities);
       let activityCards =   this.props.activities.map(
-        (act) => <Activity key={act.url} activity={act} 
+        (act) => <Activity activity={act} 
                   deleteHandler={this.props.deleteHandler}
                   editHandler={this.props.editHandler} /> 
     );

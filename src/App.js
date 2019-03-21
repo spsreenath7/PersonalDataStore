@@ -28,6 +28,7 @@ const usercurr = {
   authenticate(email) {
     this.isAuthenticated = true;
     this.currentuser = userdetailAPI.getUserByEmail(email);
+    console.log("In authenticate :");
     console.log(this.currentuser);
     console.log(this.isAuthenticated);
     // setTimeout(cb, 100) // fake async
@@ -63,8 +64,8 @@ const usercurr = {
 class PrivateRoute extends Component {
   render() {
     const { component: Component, ...rest } = this.props;
-    console.log("Inside private route " + usercurr.print)
-    usercurr.isAuthenticated=true;
+    console.log("Inside private route " );
+    usercurr.print();
 
     return (
       <Route {...rest} render={(props) =>
@@ -115,10 +116,10 @@ class Login extends Component {
 
   login(e) {
     e.preventDefault();
-    
+    console.log("Inside Login");
     fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
       usercurr.authenticate(this.state.email);
-      // this.setState({});
+       this.setState({});
     }).catch((error) => {
       console.log(error);
       this.setState({ authfailmsg: 'Incorrect credintials !!' });
@@ -129,6 +130,7 @@ class Login extends Component {
     e.preventDefault();
     fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
       userdetailAPI.add(this.state.username,this.state.email,'','');
+      console.log("After add");
       usercurr.authenticate(this.state.email);
       this.setState({});
     }).then((u) => { console.log(u) })
@@ -139,9 +141,11 @@ class Login extends Component {
   render() {
     if (usercurr.isAuthenticated === true) {
       console.log( 'redirecting to home page ');
-      return (<Redirect to='/' />)
+      const homePath = `/home/${usercurr.currentuser.userid}/`
+      console.log(homePath);
+      return (<Redirect to={homePath} />)
     }
-
+ 
 
     return (
       <div>
@@ -192,7 +196,7 @@ class Router extends Component {
           <div className="container contants">
             <Switch>
               <Route path='/user/:page' component={Login} />
-              <PrivateRoute exact path='/home/:userid/' component={Home} />
+              <PrivateRoute exact path='/home/:userid/*' component={Home} />
               <Route exact path='/' component={About} />
               <Redirect from='*' to='/user/login' />
             </Switch>

@@ -28,7 +28,9 @@ export default class Profile extends React.Component {
   componentDidMount() {
 
     // console.log('in profile component mount ' + this.props.usersid);
-    let user = userdetail.get('mark01');
+    const userid=this.props.match.params.userid;
+    console.log("In profile : "+userid);
+    let user = userdetail.get(parseInt(userid));
     console.log(user);
     this.setState({
       status: '',
