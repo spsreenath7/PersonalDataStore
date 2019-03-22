@@ -5,6 +5,7 @@ import ActivityList from './activities/activityList';
 // import PhoneList from './components/phoneList'  src\datastore\activityAPI.js
 import activityAPI from '../../datastore/activityAPI';
 import localCache from '../../datastore/localCache';
+import activityCache from '../../datastore/activityCache';
 import CreateItem from './create/createItem';
 import TransList from './finance/transList';
 import request from 'superagent';
@@ -22,7 +23,7 @@ export default class PersonalDataTab extends React.Component {
       activeTab: '1'
     };
   }
-  async componentDidMount() {
+   componentDidMount() {
 
     // console.log('in profile component mount ' + this.props.usersid);
     
@@ -31,14 +32,16 @@ export default class PersonalDataTab extends React.Component {
     // while(activityAPI.getAll.length === 0){
     // }
     // setTimeout(2000);
-    request.get('http://localhost:3001/acts')
+    let userid=this.props.match.params.userid;
+    let actsurl=`http://localhost:3001/activities?userid=${userid}`
+    request.get(actsurl)
             .end((error, res) => {
                 if (res) {
                   console.log("Sucess");
                     let acts = JSON.parse(res.text);
-                    localCache.populate(acts);
+                    activityCache.populateActs(acts);
                     console.log(acts);
-                    this.setState({});
+                    this.setState({time:Date.now()});
                 } else {
                     console.log(error);
                 }
@@ -65,11 +68,11 @@ export default class PersonalDataTab extends React.Component {
 // }
 
   editActivity = (act) => {
-    let updateurl='http://localhost:3001/acts/'+act.id;
+    let updateurl=`http://localhost:3001/activities/${act.id}`;
         request.put(updateurl).send(act).end((error, res) => {
             if (res) {
                 console.log(" request success!");
-                console.log(localCache.update(act));
+                console.log(activityCache.update(act));
                 this.setState({time:Date.now()});
             } else {
                 console.log(error);
@@ -84,14 +87,15 @@ export default class PersonalDataTab extends React.Component {
     // console.log("inside delete");
     // activityAPI.delete(key);
     // console.log("after delete");
-    request.delete('http://localhost:3001/acts/'+id).end((error, res) => {
+    let actsurl=`http://localhost:3001/activities/${id}`
+    request.delete(actsurl).end((error, res) => {
             if (res) {
-                console.log("success!");
-                console.log(localCache.getAll());
+                console.log(" delete success!");
+                // console.log(localCache.getAll());
                 console.log("local delete!");
-                localCache.delete(id);
+                activityCache.delete(id);
                 console.log("after local delte!");
-                console.log(localCache.getAll());
+                // console.log(localCache.getAll());
                 this.setState({time:Date.now()});
             } else {
                 console.log(error);
@@ -106,11 +110,13 @@ export default class PersonalDataTab extends React.Component {
 
   addActivity = (act) => {
     
-    let addurl='http://localhost:3001/acts/';
+    // let userid=this.props.match.params.userid;
+    let addurl= `http://localhost:3001/activities/`;  //'http://localhost:3001/acts/';
         request.post(addurl).send(act).end((error, res) => {
             if (res) {
-                console.log(" request success!");
-                localCache.add(act);
+                console.log("addActivity request success!");
+                activityCache.add(act);
+                console.log(activityCache.getAll());
                 this.setState({time:Date.now()});
             } else {
                 console.log(error);
@@ -130,12 +136,13 @@ export default class PersonalDataTab extends React.Component {
   }
   render() {
     
-    let activities =localCache.getAll();
+    let activities =activityCache.getAll();
+
     console.log("in perstab render");
     console.log(activities);
     return (
       <div>
-        <CreateItem addActivity={this.addActivity}/>
+        <CreateItem addActivity={this.addActivity} userid={this.props.match.params.userid}/>
         <Nav tabs>
           <NavItem className={this.state.activeTab === '1' ? 'active' : ''}>
             <NavLink

@@ -3,10 +3,38 @@ import _ from 'lodash';
 class LocalCache {
     constructor() {
         this.acts = [] ;
+        this.currentuser= {
+            id: '',
+            profile:{
+                name: '',
+                email: '',
+                gender: '',
+                contact: ''
+            }
+        }
     }
 
     getAll() {
-        return this.acts ;
+        return this.currentuser ;
+    }
+
+    getUser() {
+        return this.currentuser ;
+    }
+
+    populateUser(user) {
+        this.currentuser = user;
+        console.log("Inside poplate user :")
+        console.log(this.currentuser);
+    }
+
+    updateProfile(profile)
+    {
+        this.currentuser.profile = profile;
+    }
+
+    getProfile(){
+        return this.currentuser.profile;
     }
 
     populate(acts) {

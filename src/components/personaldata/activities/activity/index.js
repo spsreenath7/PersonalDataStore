@@ -15,13 +15,14 @@ export default class Activity extends React.Component {
       status: '',
       visible: false,
       id: this.props.activity.id,
+      userid: this.props.activity.userid,
       title: this.props.activity.title,
       url: this.props.activity.url,
       date: this.props.activity.date,
       catogery: this.props.activity.catogery ,
       privacy: this.props.activity.privacy ,
       previousDetails: {
-        id: this.props.activity.id,
+        // id: this.props.activity.id,
         title: this.props.activity.title,
         url: this.props.activity.url,
         date: this.props.activity.date,
@@ -60,7 +61,8 @@ export default class Activity extends React.Component {
     console.log("Catogery before update :" +updatedcatogery);
     
     let updatedact ={
-      id: this.state.activity.id,
+      id: this.props.activity.id,
+      userid: this.props.activity.userid,
       title: updatedTitle,
       url: updatedurl,
       date: updateddate,
@@ -115,10 +117,10 @@ export default class Activity extends React.Component {
     
     e.preventDefault();
     console.log("inside handledelete");
-    console.log(this.state.id+ " " +this.state.title);
+    console.log(this.props.activity.id+ " " +this.state.title);
     // activityDetail.delete(this.props.id).then(()=>console.log('XXXXXXXXX')).then(()=>this.props.deleteHandler());
         
-    this.props.deleteHandler(this.state.id);
+    this.props.deleteHandler(this.props.activity.id);
         
 
   }

@@ -1,6 +1,8 @@
 import React from 'react';
 import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import userdetail from '../../datastore/userdetail';
+import localCache from '../../datastore/localCache';
+import request from 'superagent';
 
 export default class Profile extends React.Component {
 
@@ -28,21 +30,23 @@ export default class Profile extends React.Component {
   componentDidMount() {
 
     // console.log('in profile component mount ' + this.props.usersid);
-    const userid=this.props.match.params.userid;
-    console.log("In profile : "+userid);
-    let user = userdetail.get(parseInt(userid));
-    console.log(user);
+    // const userid=this.props.match.params.userid;
+    // console.log("In profile : "+userid);
+    // let user = userdetail.get(parseInt(userid));
+    let profile= localCache.getProfile();
+    console.log("Comp did mount")
+    console.log(localCache.getUser());
     this.setState({
       status: '',
-      name: user.name,
-      email: user.email,
-      gender: user.gender,
-      contact: user.contact,
+      name: profile.name,
+      email: profile.email,
+      gender: profile.gender,
+      contact: profile.contact,
       previousDetails: {
-        name: user.name,
-        email: user.email,
-        gender: user.gender,
-        contact: user.contact
+        name: profile.name,
+        email: profile.email,
+        gender: profile.gender,
+        contact: profile.contact
       }
     });
   }
@@ -62,18 +66,50 @@ export default class Profile extends React.Component {
     let updatedEmail = this.state.email.trim();
     let updatedGender = this.state.gender.trim();
     let updatedContact = this.state.contact.trim();
+    localCache.updateProfile({
+      name: updatedName,
+      email: updatedEmail,
+      gender: updatedGender,
+      contact: updatedContact
+    });
+    let user = localCache.getUser();
+    // userdetail.update(this.state.previousDetails.email,
+    //   updatedName, updatedEmail, updatedGender, updatedContact);
 
-    userdetail.update(this.state.previousDetails.email,
-      updatedName, updatedEmail, updatedGender, updatedContact);
+    const userid = this.props.match.params.userid;
+    let updateurl = 'http://localhost:3001/users/' + userid;
 
-      let {name, email, gender, contact} = this.state ;
-      this.setState({status : '',
-          previousDetails: {name, email, gender, contact}
-      })
+    request.put(updateurl).send(user).end((error, res) => {
+      if (res) {
+        console.log(" request success!");
+        // console.log(localCache.update(act));
+        console.log("Updated user ");
+        console.log(user);
+        this.setState({
+          status: '',
+          previousDetails: {
+            name: updatedName,
+            email: updatedEmail,
+            gender: updatedGender,
+            contact: updatedContact
+          }
+        })
+      } else {
+        console.log(error);
+      }
+    });
+
+
+    // let { name, email, gender, contact } = this.state;
+    // this.setState({
+    //   status: '',
+    //   previousDetails: { name, email, gender, contact }
+    // })
 
   };  // Implemented later
+
   handleCancel = () => {
-    let {name, email, gender, contact} = this.state ;
+    let { name, email, gender, contact } = this.state.previousDetails;
     this.setState({
       status: '',
       name, email, gender, contact
