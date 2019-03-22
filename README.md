@@ -21,8 +21,8 @@ This app is developed to serve as a user interface for a personal data store. He
 
 Note: All the required node modules are saved in package.json, so no seperate installation of modules required. To run the app first start the local JSON server and then start the npm.
 
-json-server ./pds.json -p 3001
-npm start
++ json-server ./pds.json -p 3001
++ npm start
 
 ## Data Model Design.
 
