@@ -86,11 +86,13 @@ https://ant.design/docs/react/introduce
 
 [model]: ./images/data.JPG
 [image]: ./screen.PNG
-[comp]: ./comphire.PNG
+[comp]: ./images/comphire.PNG
 [image1]: ./images/login.PNG
 [image2]: ./images/signup.PNG
 [image4]: ./images/profile.PNG
 [image5]: ./images/profileEdit.PNG
 [image6]: ./images/activityList.PNG
+[image3]: ./images/editact.PNG
 [image7]: ./images/finance.PNG
 [image8]: ./images/createitem.PNG
+[image8]: ./images/privacy.PNG
