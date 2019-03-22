@@ -46,6 +46,8 @@ A screenshot showing the component stories from Storybook
 ![][image6]
 ![][image7]
 ![][image8]
+![][image3]
+![][image9]
 
 
 
@@ -95,4 +97,4 @@ https://ant.design/docs/react/introduce
 [image3]: ./images/editact.PNG
 [image7]: ./images/finance.PNG
 [image8]: ./images/createitem.PNG
-[image8]: ./images/privacy.PNG
+[image9]: ./images/privacy.PNG
