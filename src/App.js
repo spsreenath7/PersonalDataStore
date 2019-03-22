@@ -113,13 +113,13 @@ class PrivateRoute extends Component {
 
 export class About extends Component {
   render() {
-    return <h2>About page</h2>
+    return <h2>About page: This is a personal data store</h2>
   }
 }
 
-export class Inbox extends Component {
+export class Contact extends Component {
   render() {
-    return <h2>Inbox page</h2>
+    return <h2>Contact us at xyz@user.com</h2>
   }
 }
 
@@ -309,9 +309,9 @@ class Footer extends Component {
               <nav>
                   <ul>
                       <li><Link to="/contact">Contact Us</Link></li>
-                      <li><Link to="#">Nav X</Link></li>
-                      <li><Link to="#">Nav Y</Link></li>
-                      <li><a href="http://newsroom.fb.com/">News</a></li>
+                      <li><Link to="/">About</Link></li>
+                      
+                      
                   </ul>
               </nav>
           </footer>
@@ -331,7 +331,8 @@ class Router extends Component {
               <Route path='/user/:page' component={Login} />
               <PrivateRoute exact path='/home/:userid/*' component={Home} />
               <Route exact path='/' component={About} />
-              <Redirect from='*' to='/user/login' />
+              <Route exact path='/contact' component={Contact} />
+              <Redirect from='*' to='/' />
             </Switch>
           </div>
           <Footer />
