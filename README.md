@@ -84,13 +84,13 @@ https://ant.design/docs/react/introduce
 
 
 
-[model]: ./images/data.jpg
-[image]: ./screen.png
-[stories]: ./storybook.png
-[image1]: ./images/login.png
-[image2]: ./images/signup.png
-[image4]: ./images/profile.png
-[image5]: ./images/profileEdit.png
-[image6]: ./images/login.activityList.png
-[image7]: ./images/login.finance.png
-[image8]: ./images/login.createitem.png
+[model]: ./images/data.JPG
+[image]: ./screen.PNG
+[stories]: ./storybook.PNG
+[image1]: ./images/login.PNG
+[image2]: ./images/signup.PNG
+[image4]: ./images/profile.PNG
+[image5]: ./images/profileEdit.PNG
+[image6]: ./images/login.activityList.PNG
+[image7]: ./images/login.finance.PNG
+[image8]: ./images/login.createitem.PNG
