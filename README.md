@@ -32,7 +32,7 @@ npm start
 
 A screenshot showing the component stories from Storybook  
 
-![][stories]
+![][comp]
 
 . . . . Explain any non-standard stories, if necessary . . . . . 
 
@@ -86,11 +86,11 @@ https://ant.design/docs/react/introduce
 
 [model]: ./images/data.JPG
 [image]: ./screen.PNG
-[stories]: ./storybook.PNG
+[comp]: ./comphire.PNG
 [image1]: ./images/login.PNG
 [image2]: ./images/signup.PNG
 [image4]: ./images/profile.PNG
 [image5]: ./images/profileEdit.PNG
-[image6]: ./images/login.activityList.PNG
-[image7]: ./images/login.finance.PNG
-[image8]: ./images/login.createitem.PNG
+[image6]: ./images/activityList.PNG
+[image7]: ./images/finance.PNG
+[image8]: ./images/createitem.PNG
