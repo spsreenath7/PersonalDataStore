@@ -21,11 +21,10 @@ This app is developed to serve as a user interface for a personal data store. He
 
 Note: All the required node modules are saved in package.json, so no seperate installation of modules required. To run the app first start the local JSON server and then start the npm.
 
-json-server ./friends.json -p 3001
+json-server ./pds.json -p 3001
 npm start
 
 ## Data Model Design.
-
 
 ![][model]
 
@@ -55,10 +54,10 @@ A screenshot showing the component stories from Storybook
 
 public views
 
-+ /foos - displays all published foos
-+ /foos/:id - detail view of a particular foo (:id)
-+ etc
-+ etc
++ /user/login - login page
++ /user/signup - new user signup page
++ /contact - basic contact page
++ / -About the app
 
 private views (require login)
 
@@ -71,8 +70,6 @@ private views (require login)
 
 ## Extra features
 
-. . . . . Briefly explain any non-standard features, functional or non-functional, developed for the app. This would include user registeration and authentication, improved re-rendering policies, etc . . . . . .  
-
 + New user registeration and authentication using Firebase.
 + All user and app data is stored and retrived using mock rest API, offered by JSON sever utility.
 + Used componentDidMount which is invoked to load the user profile and activity data  immediately after their respective component is mounted.
@@ -82,7 +79,10 @@ private views (require login)
 ## Independent learning.
 
 + Learnt Fire base authentication and applied it in user login/signup
-+ Used third party components, by refering their API docs.
++ Used third party components, by refering their API docs. Below are those
+https://reactstrap.github.io/
+https://ant.design/docs/react/introduce
+
 
 
 [model]: ./images/data.jpg
